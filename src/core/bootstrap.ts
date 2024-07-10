@@ -6,7 +6,6 @@ import compression from 'compression';
 import express from 'express';
 import helmet from 'helmet';
 import { AppModule } from '~app.module';
-// import { env } from '~configs/env.config';
 import { validateConfig } from '~configs/validate.config';
 
 export class Bootstrap {
