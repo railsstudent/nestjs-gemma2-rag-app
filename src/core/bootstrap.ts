@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -10,9 +11,11 @@ import { validateConfig } from '~configs/validate.config';
 
 export class Bootstrap {
   private app: NestExpressApplication;
+  private configService: ConfigService;
 
   async initApp() {
     this.app = await NestFactory.create(AppModule);
+    this.configService = this.app.get(ConfigService);
   }
 
   enableCors() {
@@ -31,8 +34,9 @@ export class Bootstrap {
   }
 
   async startApp() {
-    // await this.app.listen(env.PORT);
-    await this.app.listen(3000);
+    const port = this.configService.get<number>('port');
+    await this.app.listen(port);
+    return port;
   }
 
   setupSwagger() {

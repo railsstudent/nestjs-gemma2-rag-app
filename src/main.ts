@@ -7,8 +7,9 @@ async function bootstrap() {
   bootstrap.setupMiddleware();
   bootstrap.setupGlobalPipe();
   bootstrap.setupSwagger();
-  bootstrap.startApp();
+  return bootstrap.startApp();
 }
+
 bootstrap()
-  .then(() => console.log('Application starts successfully'))
+  .then((port) => console.log(`Application starts at port ${port} successfully.`))
   .catch((err) => console.error(err));
