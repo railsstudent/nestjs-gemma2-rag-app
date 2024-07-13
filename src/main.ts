@@ -1,6 +1,8 @@
+import { appConfig } from '~configs/root-path.config';
 import { Bootstrap } from '~core/bootstrap';
 
 async function bootstrap() {
+  appConfig.rootPath = __dirname;
   const bootstrap = new Bootstrap();
   await bootstrap.initApp();
   bootstrap.enableCors();
