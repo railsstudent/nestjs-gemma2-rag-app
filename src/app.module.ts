@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import configuration from '~/configs/configuration';
+import { GroqModule } from '~groq/groq.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import configuration from '~/configs/configuration';
       isGlobal: true,
       load: [configuration],
     }),
+    GroqModule,
   ],
   controllers: [AppController],
   providers: [AppService],
