@@ -4,6 +4,7 @@ import configuration from '~/configs/configuration';
 import { GroqModule } from '~groq/groq.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { VectorStoreModule } from './vector-store/vector-store.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { AppService } from './app.service';
       load: [configuration],
     }),
     GroqModule,
+    VectorStoreModule,
   ],
   controllers: [AppController],
   providers: [AppService],
