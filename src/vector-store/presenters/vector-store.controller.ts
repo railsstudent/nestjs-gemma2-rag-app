@@ -19,13 +19,13 @@ export class VectorStoreController {
   }
 
   @ApiResponse({
-    description: 'Create a vector store',
-    type: String,
+    description: 'Generate an embedding vector',
+    type: Number,
+    isArray: true,
     status: HttpStatus.OK,
   })
   @Get('embedding')
-  async testTextEmbedding() {
-    await this.service.createStore();
-    return 'OK';
+  testTextEmbedding(): Promise<number[]> {
+    return this.service.testEmbedding();
   }
 }

@@ -1,11 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Embeddings } from '@langchain/core/embeddings';
+import { Inject, Injectable } from '@nestjs/common';
 import path from 'path';
 import { appConfig } from '~configs/root-path.config';
-import { ANGULAR_EVOLUTION_BOOK } from './constants/loader.constant';
+import { ANGULAR_EVOLUTION_BOOK, TEXT_EMBEDDING_MODEL } from './constants/rag.constant';
 import { loadPdf } from './loaders/pdf-loader';
 
 @Injectable()
 export class VectorStoreService {
+  constructor(@Inject(TEXT_EMBEDDING_MODEL) private embeddingModel: Embeddings) {}
+
   private async loadDocuments() {
     const bookFullPath = path.join(appConfig.rootPath, ANGULAR_EVOLUTION_BOOK);
     console.log(bookFullPath);
@@ -24,5 +27,9 @@ export class VectorStoreService {
 
   async createStore() {
     await this.loadDocuments();
+  }
+
+  async testEmbedding(): Promise<number[]> {
+    return this.embeddingModel.embedQuery('Register embedding model in NestJS is OK.');
   }
 }

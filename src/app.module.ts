@@ -13,7 +13,7 @@ import { VectorStoreModule } from './vector-store/vector-store.module';
       load: [configuration],
     }),
     GroqModule,
-    VectorStoreModule,
+    VectorStoreModule.register('HUGGINGFACE_INFERENCE'),
   ],
   controllers: [AppController],
   providers: [AppService],
