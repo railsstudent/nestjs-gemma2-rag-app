@@ -25,6 +25,7 @@
   "dependencies": {
     "@langchain/community": "0.2.18",
     "@langchain/core": "0.2.15",
+    "@langchain/google-genai": "0.0.21",
     "@langchain/groq": "0.0.13",
     "@nestjs/common": "10.3.10",
     "@nestjs/config": "3.2.3",
