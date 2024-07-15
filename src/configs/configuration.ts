@@ -6,6 +6,10 @@ export default () => ({
   },
   gemini: {
     apiKey: process.env.GEMINI_API_KEY || '',
-    model: process.env.GEMINI_TEXT_EMBEDDING_MODEL || 'text-embedding-004',
+    embeddingModel: process.env.GEMINI_TEXT_EMBEDDING_MODEL || 'text-embedding-004',
+  },
+  huggingface: {
+    apiKey: process.env.HUGGINGFACE_API_KEY || '',
+    embeddingModel: process.env.HUGGINGFACE_EMBEDDING_MODEL || 'BAAI/bge-small-en-v1.5',
   },
 });

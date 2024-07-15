@@ -17,4 +17,15 @@ export class VectorStoreController {
     await this.service.createStore();
     return 'OK';
   }
+
+  @ApiResponse({
+    description: 'Create a vector store',
+    type: String,
+    status: HttpStatus.OK,
+  })
+  @Get('embedding')
+  async testTextEmbedding() {
+    await this.service.createStore();
+    return 'OK';
+  }
 }

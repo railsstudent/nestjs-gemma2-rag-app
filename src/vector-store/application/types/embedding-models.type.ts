@@ -1,1 +1,1 @@
-export type EMBEDDING_MODELS = 'GEMINI_AI' | 'HUGGINGFACE_INFERENCE';
+export type EmbeddingModels = 'GEMINI_AI' | 'HUGGINGFACE_INFERENCE';
