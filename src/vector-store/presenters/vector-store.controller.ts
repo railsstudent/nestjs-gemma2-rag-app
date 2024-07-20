@@ -9,13 +9,12 @@ export class VectorStoreController {
 
   @ApiResponse({
     description: 'Create a vector store',
-    type: String,
+    type: Object,
     status: HttpStatus.OK,
   })
   @Get()
   async testVectorStore() {
-    await this.service.createStore();
-    return 'OK';
+    return this.service.testVectorStore();
   }
 
   @ApiResponse({

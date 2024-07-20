@@ -13,7 +13,7 @@ import { AppService } from './app.service';
       load: [configuration],
     }),
     GroqModule,
-    VectorStoreModule.register('GEMINI_AI'),
+    VectorStoreModule.register('GEMINI_AI', 'MEMORY'),
   ],
   controllers: [AppController],
   providers: [AppService],
