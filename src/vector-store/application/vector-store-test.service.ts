@@ -15,10 +15,10 @@ export class VectorStoreTestService {
   }
 
   async testSimilaritySearchWithScore() {
-    return this.vectorStoreService.similaritySearchWithScore('directive api', 3);
+    return this.vectorStoreService.similaritySearchWithScore('server-side rendering', 3);
   }
 
   async testSimilaritySearch() {
-    return this.vectorStoreService.similaritySearch('directive api', 3);
+    return this.vectorStoreService.similaritySearch('server-side rendering', 3);
   }
 }

@@ -4,11 +4,12 @@ import { QdrantVectorStore } from '@langchain/qdrant';
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { QdrantClient } from '@qdrant/js-client-rest';
-import { VectorStoreContract } from './interfaces/vector-store-contract.interface';
-import { QdrantDatabaseConfig } from './types/qdrant-database-config.type';
-import { VectorQueryParameters, VectorStoreConfig } from './types/vector-store-config.type';
+import { VectorStoreContract } from '../interfaces/vector-store-contract.interface';
+import { VectorQueryParameters, VectorStoreConfig } from '../types/vector-store-config.type';
+import { QdrantDatabaseConfig } from '../types/qdrant-database-config.type';
 
 const COLLECTION_NAME = 'angular_evolution_collection';
+
 @Injectable()
 export class QdrantVectorStoreService implements VectorStoreContract {
   private readonly logger = new Logger(QdrantVectorStoreService.name);
