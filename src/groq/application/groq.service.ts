@@ -1,8 +1,8 @@
+import { MessageContent } from '@langchain/core/messages';
+import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ChatGroq } from '@langchain/groq';
 import { Inject, Injectable } from '@nestjs/common';
 import { GROQ_CHAT_MODEL } from './constants/groq.constant';
-import { ChatPromptTemplate } from '@langchain/core/prompts';
-import { MessageContent } from '@langchain/core/messages';
 
 @Injectable()
 export class GroqService {

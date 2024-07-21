@@ -15,6 +15,6 @@ export class GroqController {
   })
   @Get()
   testChain(): Promise<MessageContent> {
-    return this.service.generateText('What are LangChain and LangGraph?');
+    return this.service.generateText('What is Agentic RAG?');
   }
 }

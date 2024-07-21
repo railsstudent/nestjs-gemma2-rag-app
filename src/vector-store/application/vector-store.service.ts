@@ -1,5 +1,6 @@
 import { DocumentInterface } from '@langchain/core/documents';
 import { Embeddings } from '@langchain/core/embeddings';
+import { VectorStore, VectorStoreRetriever } from '@langchain/core/vectorstores';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import path from 'path';
 import { appConfig } from '~configs/root-path.config';
@@ -15,10 +16,10 @@ export class VectorStoreService {
     @Inject(TEXT_EMBEDDING_MODEL) embeddings: Embeddings,
     @Inject(VECTOR_DATABASE) private dbService: VectorDatabase,
   ) {
-    this.createVectorStore(embeddings, this.dbService);
+    this.createDatabase(embeddings, this.dbService);
   }
 
-  private async createVectorStore(embeddings: Embeddings, dbService: VectorDatabase) {
+  private async createDatabase(embeddings: Embeddings, dbService: VectorDatabase) {
     const docs = await this.loadDocuments();
     await dbService.init({ docs, embeddings });
   }
@@ -43,5 +44,10 @@ export class VectorStoreService {
   similaritySearch(query: string, numResults = 1): Promise<DocumentInterface[]> {
     this.logger.log(`similaritySearch query -> ${query}, numResults -> ${numResults}`);
     return this.dbService.similaritySearch({ query, numResults });
+  }
+
+  asRetriever(): VectorStoreRetriever<VectorStore> {
+    this.logger.log(`return vector retriever`);
+    return this.dbService.asRetriever();
   }
 }

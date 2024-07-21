@@ -1,5 +1,5 @@
 import { DocumentInterface } from '@langchain/core/documents';
-import { VectorStore } from '@langchain/core/vectorstores';
+import { VectorStore, VectorStoreRetriever } from '@langchain/core/vectorstores';
 import { Injectable, Logger } from '@nestjs/common';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { VectorDatabase } from '../interfaces/vector-database.interface';
@@ -26,5 +26,9 @@ export class MemoryVectorDBService implements VectorDatabase {
     const { query, numResults = 1 } = queryParameters;
     const results = await this.vectorStore.similaritySearchWithScore(query, numResults);
     return results.map(([doc, score]) => ({ doc, score }));
+  }
+
+  asRetriever(): VectorStoreRetriever<VectorStore> {
+    return this.vectorStore.asRetriever();
   }
 }

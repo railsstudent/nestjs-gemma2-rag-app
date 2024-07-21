@@ -1,5 +1,5 @@
 import { DocumentInterface } from '@langchain/core/documents';
-import { VectorStore } from '@langchain/core/vectorstores';
+import { VectorStore, VectorStoreRetriever } from '@langchain/core/vectorstores';
 import { QdrantVectorStore } from '@langchain/qdrant';
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -56,5 +56,9 @@ export class QdrantVectorDBService implements VectorDatabase {
     const { query, numResults = 1 } = queryParameters;
     const results = await this.vectorStore.similaritySearchWithScore(query, numResults);
     return results.map(([doc, score]) => ({ doc, score }));
+  }
+
+  asRetriever(): VectorStoreRetriever<VectorStore> {
+    return this.vectorStore.asRetriever();
   }
 }
