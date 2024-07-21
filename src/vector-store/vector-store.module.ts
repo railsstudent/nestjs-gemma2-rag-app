@@ -1,6 +1,6 @@
-import { DynamicModule, InternalServerErrorException, Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { TEXT_EMBEDDING_MODEL, VECTOR_STORE_TYPE } from './application/constants/rag.constant';
+import { TEXT_EMBEDDING_MODEL, VECTOR_DATABASE, VECTOR_STORE_TYPE } from './application/constants/rag.constant';
 import { createTextEmbeddingModel } from './application/embeddings/create-embedding-model';
 import { MemoryVectorStoreService } from './application/memory-vector-store.service';
 import { QdrantVectorStoreService } from './application/qdrant-vector-store.service';
@@ -16,12 +16,6 @@ import { VectorStoreController } from './presenters/vector-store.controller';
 })
 export class VectorStoreModule {
   static register(embeddingModel: EmbeddingModels, vectorStoreType: VectorStoresType): DynamicModule {
-    if (embeddingModel === 'GEMINI_AI') {
-    } else if (embeddingModel === 'HUGGINGFACE_INFERENCE') {
-    } else {
-      throw new InternalServerErrorException('Invalid type of embedding model.');
-    }
-
     return {
       module: VectorStoreModule,
       providers: [
@@ -33,6 +27,17 @@ export class VectorStoreModule {
         {
           provide: VECTOR_STORE_TYPE,
           useValue: vectorStoreType,
+        },
+        {
+          provide: VECTOR_DATABASE,
+          useFactory: (type: VectorStoresType, configService: ConfigService) => {
+            if (type === 'MEMORY') {
+              return new MemoryVectorStoreService();
+            } else if (type === 'QDRANT') {
+              return new QdrantVectorStoreService(configService);
+            }
+          },
+          inject: [VECTOR_STORE_TYPE, ConfigService],
         },
       ],
     };
