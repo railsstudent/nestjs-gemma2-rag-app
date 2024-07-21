@@ -2,22 +2,20 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TEXT_EMBEDDING_MODEL, VECTOR_DATABASE, VECTOR_STORE_TYPE } from './application/constants/rag.constant';
 import { createTextEmbeddingModel } from './application/embeddings/create-embedding-model';
-import { MemoryVectorStoreService } from './application/vector-databases/memory-vector-store.service';
 import { EmbeddingModels } from './application/types/embedding-models.type';
-import { VectorStoresType } from './application/types/vector-stores.type';
+import { VectorDatabasesType } from './application/types/vector-databases.type';
+import { createVectorDatabase, MemoryVectorDBService, QdrantVectorDBService } from './application/vector-databases';
 import { VectorStoreTestService } from './application/vector-store-test.service';
 import { VectorStoreService } from './application/vector-store.service';
 import { VectorStoreController } from './presenters/vector-store.controller';
-import { createVectorDatabase } from './application/vector-databases/create-vector-database';
-import { QdrantVectorStoreService } from './application/vector-databases/qdrant-vector-store.service';
 
 @Module({
-  providers: [VectorStoreService, VectorStoreTestService, MemoryVectorStoreService, QdrantVectorStoreService],
+  providers: [VectorStoreService, VectorStoreTestService, MemoryVectorDBService, QdrantVectorDBService],
   controllers: [VectorStoreController],
   exports: [VectorStoreService],
 })
 export class VectorStoreModule {
-  static register(embeddingModel: EmbeddingModels, vectorStoreType: VectorStoresType): DynamicModule {
+  static register(embeddingModel: EmbeddingModels, vectorStoreType: VectorDatabasesType): DynamicModule {
     return {
       module: VectorStoreModule,
       providers: [
@@ -32,7 +30,7 @@ export class VectorStoreModule {
         },
         {
           provide: VECTOR_DATABASE,
-          useFactory: (type: VectorStoresType, configService: ConfigService) =>
+          useFactory: (type: VectorDatabasesType, configService: ConfigService) =>
             createVectorDatabase(type, configService),
           inject: [VECTOR_STORE_TYPE, ConfigService],
         },

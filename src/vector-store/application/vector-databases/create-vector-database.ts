@@ -1,14 +1,14 @@
 import { InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { VectorStoresType } from '../types/vector-stores.type';
-import { MemoryVectorStoreService } from './memory-vector-store.service';
-import { QdrantVectorStoreService } from './qdrant-vector-store.service';
+import { VectorDatabasesType } from '../types/vector-databases.type';
+import { MemoryVectorDBService } from './memory-vector-db.service';
+import { QdrantVectorDBService } from './qdrant-vector-db.service';
 
-export function createVectorDatabase(type: VectorStoresType, configService: ConfigService) {
+export function createVectorDatabase(type: VectorDatabasesType, configService: ConfigService) {
   if (type === 'MEMORY') {
-    return new MemoryVectorStoreService();
+    return new MemoryVectorDBService();
   } else if (type === 'QDRANT') {
-    return new QdrantVectorStoreService(configService);
+    return new QdrantVectorDBService(configService);
   }
   throw new InternalServerErrorException(`Invalid vector store type: ${type}`);
 }

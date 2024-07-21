@@ -4,7 +4,7 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import path from 'path';
 import { appConfig } from '~configs/root-path.config';
 import { ANGULAR_EVOLUTION_BOOK, TEXT_EMBEDDING_MODEL, VECTOR_DATABASE } from './constants/rag.constant';
-import { VectorStoreContract } from './interfaces/vector-store-contract.interface';
+import { VectorDatabase } from './interfaces/vector-database.interface';
 import { loadPdf } from './loaders/pdf-loader';
 
 @Injectable()
@@ -13,14 +13,14 @@ export class VectorStoreService {
 
   constructor(
     @Inject(TEXT_EMBEDDING_MODEL) embeddings: Embeddings,
-    @Inject(VECTOR_DATABASE) private vectorStoreService: VectorStoreContract,
+    @Inject(VECTOR_DATABASE) private dbService: VectorDatabase,
   ) {
-    this.createVectorStore(embeddings, this.vectorStoreService);
+    this.createVectorStore(embeddings, this.dbService);
   }
 
-  private async createVectorStore(embeddings: Embeddings, vectoreStoreService: VectorStoreContract) {
+  private async createVectorStore(embeddings: Embeddings, dbService: VectorDatabase) {
     const docs = await this.loadDocuments();
-    await vectoreStoreService.init({ docs, embeddings });
+    await dbService.init({ docs, embeddings });
   }
 
   private async loadDocuments() {
@@ -37,11 +37,11 @@ export class VectorStoreService {
 
   similaritySearchWithScore(query: string, numResults = 1): Promise<{ doc: DocumentInterface; score: number }[]> {
     this.logger.log(`similaritySearchWithScore query -> ${query}, numResults -> ${numResults}`);
-    return this.vectorStoreService.similaritySearchWithScore({ query, numResults });
+    return this.dbService.similaritySearchWithScore({ query, numResults });
   }
 
   similaritySearch(query: string, numResults = 1): Promise<DocumentInterface[]> {
     this.logger.log(`similaritySearch query -> ${query}, numResults -> ${numResults}`);
-    return this.vectorStoreService.similaritySearch({ query, numResults });
+    return this.dbService.similaritySearch({ query, numResults });
   }
 }

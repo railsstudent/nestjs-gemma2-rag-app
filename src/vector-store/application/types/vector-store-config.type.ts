@@ -1,16 +1,16 @@
 import { Document } from '@langchain/core/documents';
 import { Embeddings } from '@langchain/core/embeddings';
-import { VectorStoresType } from './vector-stores.type';
+import { VectorDatabasesType } from './vector-databases.type';
 
-export type VectorStoreFactoryConfig = {
+export type VectorDatabaseFactoryConfig = {
   docs: Document<Record<string, any>>[];
-  type: VectorStoresType;
+  type: VectorDatabasesType;
   embeddings: Embeddings;
 };
 
-export type VectorStoreConfig = Omit<VectorStoreFactoryConfig, 'type'>;
+export type DatabaseConfig = Omit<VectorDatabaseFactoryConfig, 'type'>;
 
-export type VectorQueryParameters = {
+export type QueryParameters = {
   query: string;
   numResults?: number;
 };

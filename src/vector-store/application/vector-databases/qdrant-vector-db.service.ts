@@ -4,20 +4,20 @@ import { QdrantVectorStore } from '@langchain/qdrant';
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { QdrantClient } from '@qdrant/js-client-rest';
-import { VectorStoreContract } from '../interfaces/vector-store-contract.interface';
-import { VectorQueryParameters, VectorStoreConfig } from '../types/vector-store-config.type';
+import { VectorDatabase } from '../interfaces/vector-database.interface';
+import { QueryParameters, DatabaseConfig } from '../types/vector-store-config.type';
 import { QdrantDatabaseConfig } from '../types/qdrant-database-config.type';
 
 const COLLECTION_NAME = 'angular_evolution_collection';
 
 @Injectable()
-export class QdrantVectorStoreService implements VectorStoreContract {
-  private readonly logger = new Logger(QdrantVectorStoreService.name);
+export class QdrantVectorDBService implements VectorDatabase {
+  private readonly logger = new Logger(QdrantVectorDBService.name);
   private vectorStore: VectorStore;
 
   constructor(private configService: ConfigService) {}
 
-  async init({ docs, embeddings }: VectorStoreConfig): Promise<void> {
+  async init({ docs, embeddings }: DatabaseConfig): Promise<void> {
     this.logger.log('QdrantVectorStoreService init called');
     const { url, apiKey } = this.configService.get<QdrantDatabaseConfig>('qdrant');
     const client = new QdrantClient({ url, apiKey });
@@ -45,13 +45,13 @@ export class QdrantVectorStoreService implements VectorStoreContract {
     });
   }
 
-  similaritySearch(queryParameters: VectorQueryParameters): Promise<DocumentInterface[]> {
+  similaritySearch(queryParameters: QueryParameters): Promise<DocumentInterface[]> {
     const { query, numResults = 1 } = queryParameters;
     return this.vectorStore.similaritySearch(query, numResults);
   }
 
   async similaritySearchWithScore(
-    queryParameters: VectorQueryParameters,
+    queryParameters: QueryParameters,
   ): Promise<{ doc: DocumentInterface; score: number }[]> {
     const { query, numResults = 1 } = queryParameters;
     const results = await this.vectorStore.similaritySearchWithScore(query, numResults);
