@@ -7,7 +7,7 @@ import { VectorDatabasesType } from './application/types/vector-databases.type';
 import { createVectorDatabase, MemoryVectorDBService, QdrantVectorDBService } from './application/vector-databases';
 import { VectorStoreTestService } from './application/vector-store-test.service';
 import { VectorStoreService } from './application/vector-store.service';
-import { VectorStoreController } from './presenters/vector-store.controller';
+import { VectorStoreController } from './presenters/http/vector-store.controller';
 
 @Module({
   providers: [VectorStoreService, VectorStoreTestService, MemoryVectorDBService, QdrantVectorDBService],

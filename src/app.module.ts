@@ -4,10 +4,9 @@ import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import configuration from '~/configs/configuration';
 import { throttlerConfig } from '~configs/throttler.config';
-import { GroqModule } from '~groq/groq.module';
-import { VectorStoreModule } from '~vector-store/vector-store.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { RagChainModule } from './rag-chain/rag-chain.module';
 
 @Module({
   imports: [
@@ -16,8 +15,7 @@ import { AppService } from './app.service';
       load: [configuration],
     }),
     throttlerConfig,
-    GroqModule,
-    VectorStoreModule.register('GEMINI_AI', 'QDRANT'),
+    RagChainModule,
   ],
   controllers: [AppController],
   providers: [

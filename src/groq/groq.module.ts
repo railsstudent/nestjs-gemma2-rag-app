@@ -6,5 +6,6 @@ import { GroqController } from './presenters/http/groq.controller';
 @Module({
   providers: [GroqChatModelProvider, GroqService],
   controllers: [GroqController],
+  exports: [GroqChatModelProvider],
 })
 export class GroqModule {}
