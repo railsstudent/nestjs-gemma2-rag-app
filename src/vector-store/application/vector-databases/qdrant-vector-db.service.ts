@@ -1,12 +1,11 @@
-import { DocumentInterface } from '@langchain/core/documents';
 import { VectorStore, VectorStoreRetriever } from '@langchain/core/vectorstores';
 import { QdrantVectorStore } from '@langchain/qdrant';
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { QdrantClient } from '@qdrant/js-client-rest';
 import { VectorDatabase } from '../interfaces/vector-database.interface';
-import { QueryParameters, DatabaseConfig } from '../types/vector-store-config.type';
 import { QdrantDatabaseConfig } from '../types/qdrant-database-config.type';
+import { DatabaseConfig } from '../types/vector-store-config.type';
 
 const COLLECTION_NAME = 'angular_evolution_collection';
 
@@ -43,19 +42,6 @@ export class QdrantVectorDBService implements VectorDatabase {
       client,
       collectionName: COLLECTION_NAME,
     });
-  }
-
-  similaritySearch(queryParameters: QueryParameters): Promise<DocumentInterface[]> {
-    const { query, numResults = 1 } = queryParameters;
-    return this.vectorStore.similaritySearch(query, numResults);
-  }
-
-  async similaritySearchWithScore(
-    queryParameters: QueryParameters,
-  ): Promise<{ doc: DocumentInterface; score: number }[]> {
-    const { query, numResults = 1 } = queryParameters;
-    const results = await this.vectorStore.similaritySearchWithScore(query, numResults);
-    return results.map(([doc, score]) => ({ doc, score }));
   }
 
   asRetriever(): VectorStoreRetriever<VectorStore> {

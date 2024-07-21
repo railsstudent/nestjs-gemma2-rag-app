@@ -1,4 +1,3 @@
-import { DocumentInterface } from '@langchain/core/documents';
 import { Embeddings } from '@langchain/core/embeddings';
 import { VectorStore, VectorStoreRetriever } from '@langchain/core/vectorstores';
 import { Inject, Injectable, Logger } from '@nestjs/common';
@@ -34,16 +33,6 @@ export class VectorStoreService {
     //   console.log('first page', firstPage.pageContent);
     // }
     return docs;
-  }
-
-  similaritySearchWithScore(query: string, numResults = 1): Promise<{ doc: DocumentInterface; score: number }[]> {
-    this.logger.log(`similaritySearchWithScore query -> ${query}, numResults -> ${numResults}`);
-    return this.dbService.similaritySearchWithScore({ query, numResults });
-  }
-
-  similaritySearch(query: string, numResults = 1): Promise<DocumentInterface[]> {
-    this.logger.log(`similaritySearch query -> ${query}, numResults -> ${numResults}`);
-    return this.dbService.similaritySearch({ query, numResults });
   }
 
   asRetriever(): VectorStoreRetriever<VectorStore> {

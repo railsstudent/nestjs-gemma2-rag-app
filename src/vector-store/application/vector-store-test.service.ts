@@ -14,11 +14,7 @@ export class VectorStoreTestService {
     return this.embeddings.embedQuery('Register embedding model in NestJS is OK.');
   }
 
-  async testSimilaritySearchWithScore() {
-    return this.vectorStoreService.similaritySearchWithScore('server-side rendering', 3);
-  }
-
-  async testSimilaritySearch() {
-    return this.vectorStoreService.similaritySearch('server-side rendering', 3);
+  async testRetriever() {
+    return this.vectorStoreService.asRetriever();
   }
 }

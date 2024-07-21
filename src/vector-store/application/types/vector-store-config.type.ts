@@ -9,8 +9,3 @@ export type VectorDatabaseFactoryConfig = {
 };
 
 export type DatabaseConfig = Omit<VectorDatabaseFactoryConfig, 'type'>;
-
-export type QueryParameters = {
-  query: string;
-  numResults?: number;
-};

@@ -8,23 +8,13 @@ export class VectorStoreController {
   constructor(private service: VectorStoreTestService) {}
 
   @ApiResponse({
-    description: 'Test similarity search',
-    type: Object,
+    description: "Retrieve retriever's name",
+    type: String,
     status: HttpStatus.OK,
   })
-  @Get('similarity-search')
-  async testSimilaritySearch() {
-    return this.service.testSimilaritySearch();
-  }
-
-  @ApiResponse({
-    description: 'Test similarity search with score',
-    type: Object,
-    status: HttpStatus.OK,
-  })
-  @Get('similarity-search-with-score')
-  async testSimilaritySearchWithScore() {
-    return this.service.testSimilaritySearchWithScore();
+  @Get('retriever')
+  async testRetriever() {
+    return (await this.service.testRetriever()).getName();
   }
 
   @ApiResponse({
