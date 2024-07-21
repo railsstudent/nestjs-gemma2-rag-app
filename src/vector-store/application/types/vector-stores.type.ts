@@ -1,1 +1,1 @@
-export type VectorStoresType = 'MEMORY' | 'CHROMA';
+export type VectorStoresType = 'MEMORY' | 'QDRANT';

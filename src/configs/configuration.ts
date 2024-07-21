@@ -12,4 +12,8 @@ export default () => ({
     apiKey: process.env.HUGGINGFACE_API_KEY || '',
     embeddingModel: process.env.HUGGINGFACE_EMBEDDING_MODEL || 'BAAI/bge-small-en-v1.5',
   },
+  qdrant: {
+    url: process.env.QDRANT_URL || 'http://localhost:6333',
+    apiKey: process.env.QDRANT_APK_KEY || '',
+  },
 });

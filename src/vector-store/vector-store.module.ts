@@ -2,13 +2,16 @@ import { DynamicModule, InternalServerErrorException, Module } from '@nestjs/com
 import { ConfigService } from '@nestjs/config';
 import { TEXT_EMBEDDING_MODEL, VECTOR_STORE_TYPE } from './application/constants/rag.constant';
 import { createTextEmbeddingModel } from './application/embeddings/create-embedding-model';
+import { MemoryVectorStoreService } from './application/memory-vector-store.service';
+import { QdrantVectorStoreService } from './application/qdrant-vector-store.service';
 import { EmbeddingModels } from './application/types/embedding-models.type';
 import { VectorStoresType } from './application/types/vector-stores.type';
+import { VectorStoreTestService } from './application/vector-store-test.service';
 import { VectorStoreService } from './application/vector-store.service';
 import { VectorStoreController } from './presenters/vector-store.controller';
 
 @Module({
-  providers: [VectorStoreService],
+  providers: [VectorStoreService, QdrantVectorStoreService, VectorStoreTestService, MemoryVectorStoreService],
   controllers: [VectorStoreController],
 })
 export class VectorStoreModule {
