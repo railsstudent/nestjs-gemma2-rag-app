@@ -4,8 +4,11 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import compression from 'compression';
 import express from 'express';
+import hbs from 'hbs';
 import helmet from 'helmet';
+import path from 'path';
 import { AppModule } from '~app.module';
+import { appConfig } from '~configs/root-path.config';
 import { validateConfig } from '~configs/validate.config';
 
 export class Bootstrap {
@@ -47,5 +50,14 @@ export class Bootstrap {
       .build();
     const document = SwaggerModule.createDocument(this.app, config);
     SwaggerModule.setup('api', this.app, document);
+  }
+
+  initVewEngine() {
+    const viewDir = path.join(appConfig.rootPath, '..', 'views');
+    const partialsDir = `${viewDir}/partials`;
+    this.app.setBaseViewsDir(viewDir);
+    this.app.setViewEngine('hbs');
+    this.app.set('view options', { layout: 'layout/default' });
+    hbs.registerPartials(partialsDir);
   }
 }

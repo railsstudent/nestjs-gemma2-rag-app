@@ -10,6 +10,7 @@ async function bootstrap() {
   bootstrap.setupMiddleware();
   bootstrap.setupGlobalPipe();
   bootstrap.setupSwagger();
+  bootstrap.initVewEngine();
   return bootstrap.startApp();
 }
 

@@ -5,7 +5,7 @@ import { RagService } from './application/rag.service';
 import { RagController } from './presenters/http/rag.controller';
 
 @Module({
-  imports: [GroqModule, VectorStoreModule.register('GEMINI_AI', 'QDRANT')],
+  imports: [GroqModule, VectorStoreModule.register('GEMINI_AI', 'MEMORY')],
   providers: [RagService],
   controllers: [RagController],
 })
