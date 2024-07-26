@@ -53,11 +53,13 @@ export class Bootstrap {
   }
 
   initVewEngine() {
-    const viewDir = path.join(appConfig.rootPath, '..', 'views');
-    const partialsDir = `${viewDir}/partials`;
+    const projectDir = path.join(appConfig.rootPath, '..');
+    const viewDir = path.join(projectDir, 'views');
+    console.log(path.join(projectDir, 'public'));
+    this.app.useStaticAssets(path.join(projectDir, 'public'));
     this.app.setBaseViewsDir(viewDir);
     this.app.setViewEngine('hbs');
-    this.app.set('view options', { layout: 'layout/default' });
-    hbs.registerPartials(partialsDir);
+    this.app.set('view options', { layout: 'layouts/default' });
+    hbs.registerPartials(`${viewDir}/partials`);
   }
 }
