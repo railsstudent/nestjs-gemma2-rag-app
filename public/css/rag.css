@@ -1,0 +1,27 @@
+.rag-container button {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+}
+
+.rag-container .chat-heading, .rag-container label span {
+    color: #aab;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.rag-container label input {
+    margin-bottom: 1rem;
+}
+
+.rag-container label span {
+    margin-right: 0.25rem;
+    font-size: 1rem;
+    width: 20%;
+}
+
+.rag-container input {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    width: 80%;
+}
