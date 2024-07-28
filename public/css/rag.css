@@ -38,3 +38,37 @@
     width: 1rem;
     height: 1rem;
 }
+
+#chat-results {
+    margin-bottom: 1rem;
+}
+
+#chat-results > .header {
+    font-size: 1.25rem;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+#chat-results > .response {
+    font-size: 1rem;
+}
+
+#chat-results > .header, #chat-results > .response {
+    display: flex;
+    color: #464646;
+}
+
+#chat-results > .header > span, #chat-results > .response > span {
+    border: 1px solid #464646;
+    padding: 0.25rem;
+}
+
+#chat-results > .header > span:nth-of-type(1),
+#chat-results > .response > span:nth-of-type(1) {
+    width: 20%;
+}
+
+#chat-results > .header > span:nth-of-type(2),
+#chat-results > .response > span:nth-of-type(2) {
+    width: 80%;
+}
