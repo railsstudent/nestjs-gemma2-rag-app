@@ -1,6 +1,6 @@
 <div class="rag-container">
-    <p class="chat-heading">Chat results</p>
-    <div id="chat-results">
+    <p class="chat-heading">Gemma 2 Chatbot</p>
+    <div id="chat-list">
         <div class="header">
             <span>Role</span><span>Result</span>
         </div>
@@ -9,16 +9,17 @@
             <span>Hello ssjfadfdfkjdhfaksjdfhjkads dsjfdsjkfhdskjfhdaskjfhdskfjdhskfjdashfkjdsahfkdsjhfakdsjfhdsakjfhdaskjfhdaskfjhdaskfjhas dsaf asfsdfdsfadsadsfadsfdsf</span>
         </div>
     </div>
-    <form>
+    <form id="rag-form" hx-post="/rag" hx-target="#chat-list" hx-swap="beforeend">
         <div>
             <label>
                 <span>Question: </span>
-                <input type="text" placeholder="Ask Angular Tech Book RAG" aria-placeholder="Placeholder to ask question to RAG"></input>
+                <input type="text" name="query"
+                    placeholder="Ask Angular Tech Book RAG" 
+                    aria-placeholder="Placeholder to ask question to RAG"></input>
             </label>
         </div>
-        <button type="submit" hx-post="">
-            <span>Send</span>
-            <img class="spinner htmx-indicator" src="/images/spinner.gif">
+        <button type="submit">
+            <span>Send</span><img class="spinner htmx-indicator" src="/images/spinner.gif">
         </button>
     </form>
 </div>
