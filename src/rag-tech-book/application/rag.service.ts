@@ -7,6 +7,7 @@ import { GROQ_CHAT_MODEL } from '~groq/application/constants/groq.constant';
 import { VectorStoreService } from '~vector-store/application/vector-store.service';
 import { createContextualizedQuestion } from './chain-with-history/create-contextual-chain';
 import { qaPrompt } from './constants/prompts.constant';
+import { ConversationContent } from './types/conversation-content.type';
 
 @Injectable()
 export class RagService {
@@ -17,7 +18,7 @@ export class RagService {
     private vectorStoreService: VectorStoreService,
   ) {}
 
-  async ask(question: string): Promise<string> {
+  async ask(question: string): Promise<ConversationContent[]> {
     const contextualizedQuestion = createContextualizedQuestion(this.model);
     const retriever = this.vectorStoreService.asRetriever();
 
@@ -41,7 +42,17 @@ export class RagService {
       if (this.chat_history.length > 10) {
         this.chat_history.shift();
       }
-      return (aiMessage.content as string) || '';
+
+      return [
+        {
+          role: 'Human',
+          content: question,
+        },
+        {
+          role: 'Assistant',
+          content: (aiMessage.content as string) || '',
+        },
+      ];
     } catch (ex) {
       console.error(ex);
       throw ex;

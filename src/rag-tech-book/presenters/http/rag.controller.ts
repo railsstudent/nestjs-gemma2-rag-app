@@ -1,6 +1,7 @@
 import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RagService } from '~rag-tech-book/application/rag.service';
+import { toDivRow } from '~rag-tech-book/formatters/response.-formatter';
 import { AskDto } from '../dtos/ask.dto';
 
 @ApiTags('RAG')
@@ -40,6 +41,7 @@ export class RagController {
   })
   @Post()
   async ask(@Body() dto: AskDto): Promise<string> {
-    return this.service.ask(dto.query);
+    const conversation = await this.service.ask(dto.query);
+    return toDivRow(conversation);
   }
 }
