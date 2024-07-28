@@ -2,10 +2,15 @@
     <p class="chat-heading">Chat results</p>
     <div id="chat-results"></div>
     <form>
-        <label>
-            <span>Question: </span>
-            <input type="text" placeholder="Ask Angular Tech Book RAG" aria-placeholder="Placeholder to ask question to RAG"></input>
-        </label>
-        <button type="submit">Send</button>
+        <div>
+            <label>
+                <span>Question: </span>
+                <input type="text" placeholder="Ask Angular Tech Book RAG" aria-placeholder="Placeholder to ask question to RAG"></input>
+            </label>
+        </div>
+        <button type="submit" hx-post="">
+            <span>Send</span>
+            <img class="spinner htmx-indicator" src="/images/spinner.gif">
+        </button>
     </form>
 </div>

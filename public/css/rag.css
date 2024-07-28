@@ -2,10 +2,18 @@
     padding: 0.5rem;
     border-radius: 0.25rem;
     font-size: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rag-container button > span {
+    margin-right: 0.25rem;
 }
 
 .rag-container .chat-heading, .rag-container label span {
-    color: #aab;
+    color: #464646;
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
 }
@@ -24,4 +32,9 @@
     padding: 0.5rem;
     border-radius: 0.25rem;
     width: 80%;
+}
+
+.rag-container .spinner {
+    width: 1rem;
+    height: 1rem;
 }
