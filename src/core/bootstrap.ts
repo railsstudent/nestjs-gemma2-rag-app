@@ -5,7 +5,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import compression from 'compression';
 import express from 'express';
 import hbs from 'hbs';
-import helmet from 'helmet';
 import path from 'path';
 import { AppModule } from '~app.module';
 import { appConfig } from '~configs/root-path.config';
@@ -28,7 +27,6 @@ export class Bootstrap {
     this.app.use(express.json({ limit: '1000kb' }));
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(compression());
-    this.app.use(helmet());
   }
 
   setupGlobalPipe() {

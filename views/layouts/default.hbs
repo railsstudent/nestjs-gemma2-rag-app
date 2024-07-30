@@ -5,7 +5,6 @@
     <meta name="description" content="Angular tech book RAG powed by gemma 2 LLM." />
     <meta name="author" content="Connie Leung" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; script-src 'self' 'nonce-dGFpbHdpbmRjc3M='; script-src-elem 'self' 'nonce-dGFpbHdpbmRjc3M=';" />
     <title>{{{ title }}}</title>
     <!--
     <link rel="stylesheet" href="css/layout.css" />
@@ -14,7 +13,7 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   </head>
   <body>
-    <script src="/js/htmx.min.js" nonce="dGFpbHdpbmRjc3M="></script>
+    <script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
     <div class="container">
       {{> header }}
       {{{ body }}}

@@ -6,7 +6,6 @@ import configuration from '~/configs/configuration';
 import { throttlerConfig } from '~configs/throttler.config';
 import { RagTechBookModule } from '~rag-tech-book/rag-tech-book.module';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -19,7 +18,6 @@ import { AppService } from './app.service';
   ],
   controllers: [AppController],
   providers: [
-    AppService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
