@@ -2,6 +2,12 @@ import { ConversationContent } from '~rag-tech-book/application/types/conversati
 
 export const toDivRow = (contents: ConversationContent[]): string => {
   return contents
-    .map(({ role, content }) => `<div class="response"><span>${role}</span><span>${content}</span></div>`)
+    .map(
+      ({ role, content }) => `
+      <div class="response text-[1rem] flex text-[#464646]">
+        <span class="w-1/5 p-1 border border-solid border-[#464646]">${role}</span>
+        <span class="w-4/5 p-1 border border-solid border-[#464646]">${content}</span>
+      </div>`,
+    )
     .join('');
 };
