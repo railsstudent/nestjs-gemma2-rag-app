@@ -26,6 +26,59 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Environment variables
+
+```
+PORT=3001
+GROQ_API_KEY=<GROQ API KEY>
+GROQ_MODEL=gemma2-9b-it
+GEMINI_API_KEY=<GEMINI API KEY>
+GEMINI_TEXT_EMBEDDING_MODEL=text-embedding-004
+HUGGINGFACE_API_KEY=<Huggingface API KEY>
+HUGGINGFACE_EMBEDDING_MODEL=BAAI/bge-small-en-v1.5
+QDRANT_URL=<Qdrant url>
+QDRANT_APK_KEY=<Qdrant API KEY>
+```
+
+## Dynamically choose embedding and vector database
+
+- Supported embeddings: Gemini AI and Huggingface inference
+- Supported vector storesembedding: Gemini AI embedding and Huggingface embedding
+
+In rag-tech-book.modulets, and change the registration of VectorStoreModule.
+
+```
+// Gemini AI embedding and Memory vector store
+
+VectorStoreModule.register('GEMINI_AI', 'MEMORY');
+```
+
+```
+// Huggingface inference and Memory vector store
+
+VectorStoreModule.register('HUGGINGFACE_INFERENCE', 'MEMORY');
+```
+
+```
+// Gemini AI embedding and Qdrant vector store
+
+VectorStoreModule.register('GEMINI_AI', 'QDRANT');
+```
+
+```
+// Huggingface inference and Qdrant vector store
+
+VectorStoreModule.register('HUGGINGFACE_INFERENCE', 'QDRANT');
+```
+
+## Client
+
+Navigate to http://localhost:3001
+
+## Swagger Documentation
+
+Navigate to http://localhost:3001/api
+
 ## Installation
 
 ```bash
